@@ -1,10 +1,11 @@
 import pandas as pd
 import requests
+import sqlite3
+import json
 
 def Dataapi_import(data1_url):
-    Library_data1_url = data1_url
 
-    response1 = requests.get(Library_data1_url)
+    response1 = requests.get(data1_url)
 
     data1_json = response1.json()
 
@@ -46,4 +47,9 @@ def Dataapi_import_nested(data1_url):
         df = df.explode("ComponentSourcePaths").reset_index(drop=True)
 
     return df
+
+def pd_to_sqlite3(df):
+    conn = sqlite3.connect('database.db')
+    df.to_sql(name='Library_stats', con=conn, if_exists='append', index=False)
+    conn.close()
 

@@ -2,10 +2,9 @@ from dash import Dash, html, dcc, Input, Output, callback
 import dash_bootstrap_components as dbc
 import web_api
 import Setting_Layout
-import pandas as pd
 
-# Import the data from the API
-data1 = web_api.Dataapi_import("https://app.lib.cityu.edu.hk/power_bi_api/api/statistics/range?startYear=2025&startMonth=6&endYear=2025&endMonth=6")
+# Import the data directly from the API
+data1 = web_api.Dataapi_import("https://app.lib.cityu.edu.hk/power_bi_api/api/statistics/range?startYear=2015&startMonth=1&endYear=2026&endMonth=12")
 data2 = web_api.Dataapi_import_nested("https://app.lib.cityu.edu.hk/power_bi_api/api/statistics/source_path")
 
 Summary_Page_Facts_df = data1[data1["CategoryId"].isin([1])]
@@ -19,7 +18,7 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 #Components
 month_slider = dcc.Slider(1, 12, 1,value=6,id='month')
-year_slider = dcc.Slider(2020, 2025, 1,value=2025, id='year')
+year_slider = dcc.Slider(2016, 2025, 1,value=2025, id='year')
 
 cards=[
     dbc.Col(
@@ -112,7 +111,7 @@ def update_cards(selected_value, month, year):
 
         return layout
 
-    layout = [dbc.Row(children=cards, className="justify-content-center g-2", id="output_summary")]
+    layout = [dbc.Row(children=cards, className="justify-content-center g-2")]
     return layout
 
 
