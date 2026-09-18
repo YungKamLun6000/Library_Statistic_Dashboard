@@ -6,7 +6,7 @@ app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP]
 
 #layout
 app.layout = dbc.Container([
-    html.H1("Library Statistics Dashboard HomePage", className="text-center my-4"),
+    html.H1("Library Statistics", className="text-center my-4"),
     html.Div([
         html.Div(
             dcc.Link(f"{page['name']} - {page['path']}", href=page["relative_path"])
