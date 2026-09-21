@@ -1,7 +1,6 @@
 import pandas as pd
 import requests
 import sqlite3
-import json
 
 def Dataapi_import(data1_url):
 

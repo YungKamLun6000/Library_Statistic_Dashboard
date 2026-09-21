@@ -6,7 +6,7 @@ Data Visualizations
 General Dashboard
 
 # WebAPI running Requirements:
-Python Library: dash, pandas, dash_bootstrap_components
+Python Library: dash, pandas, dash_bootstrap_components, plotly.express, requests
 Download Python 3.14
 
 # WebAPI running instructions:
