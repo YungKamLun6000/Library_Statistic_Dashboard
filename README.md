@@ -24,7 +24,6 @@ This project is a **Library Statistics Dashboard** built using Python and Dash t
    - plotly.express
    - requests
 
-Install the required libraries with:
 
 ---
 
