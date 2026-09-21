@@ -3,8 +3,13 @@ from dash import html, dcc, callback, Input, Output
 import pandas as pd
 import sqlite3
 import plotly.express as px
+import os
 
-cnx = sqlite3.connect(r'C:\Users\kamlyung2\PycharmProjects\WelcomeScreen\Library_statistics\database.db')
+base_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(base_dir)
+db_path = os.path.join(parent_dir, 'database.db')
+
+cnx = sqlite3.connect(db_path)
 df = pd.read_sql_query('''SELECT * FROM Library_stats''', cnx)
 df = df.drop(df[df["Year"] == 2016].index)
 df = df.reset_index()
