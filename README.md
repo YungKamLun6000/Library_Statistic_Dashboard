@@ -50,9 +50,8 @@ The project follows this modular structure:
 ### Pages Folder:
 - **`generalDashboard.py`**: A dashboard page that displays general library statistics.
 - **`Visualizations.py`**: A dashboard page that plots time-series graphs of columns extracted from the database.
-
+- **`Natural Language Query.py`**: This is functional but need refinement to improve model output of SQL query
 ### Other Scripts:
-- **`Natural Language Query.py`** and **`encoding_dsv4.py`**: These scripts are under development and not yet functional.
 - **`Data exploration.py`**: For local data inspection and exploration. This script is for analysis purposes and is not part of the main WebAPI.
 
 ---
