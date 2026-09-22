@@ -49,7 +49,6 @@ The project follows this modular structure:
 ### Pages Folder:
 - **`generalDashboard.py`**: A dashboard page that displays general library statistics.
 - **`Visualizations.py`**: A dashboard page that plots time-series graphs of columns extracted from the database.
-- **`Natural Language Query.py`**: This is functional but need refinement to improve model output of SQL query
 
 ---
 
