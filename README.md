@@ -17,14 +17,13 @@ This project is a **Library Statistics Dashboard** built using Python and Dash t
 
 1. **Python Version**: Python 3.14
 
-2. **Required Python Libraries**:
+2. **Required Python Libraries to be installed before running**:
    - dash
    - pandas
    - dash-bootstrap-components
    - plotly.express
    - requests
 
-Install the required libraries with:
 
 ---
 
