@@ -1,7 +1,7 @@
 import os
 import sqlite3
 import pandas as pd
-from dash import html, Input, Output, callback, State, dash_table
+from dash import html, Input, Output, callback, State
 import dash_bootstrap_components as dbc
 from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
@@ -9,11 +9,8 @@ import dash
 import re
 
 
-# Define repository and model path
-MODEL_NAME = "Qwen/Qwen2.5-Coder-1.5B-Instruct"  # Replace colon with valid character!
-
-# Check Hugging Face Token
-os.environ["HF_TOKEN"] = "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"  # Set your Hugging Face token
+MODEL_NAME = "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+os.environ["HF_TOKEN"] = "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"
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(base_dir)
@@ -23,6 +20,7 @@ print("Loading model and tokenizer locally...")
 try:
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, token=os.environ["HF_TOKEN"])
     device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(device)
     model = AutoModelForCausalLM.from_pretrained(
         MODEL_NAME,
         token=os.environ["HF_TOKEN"],
