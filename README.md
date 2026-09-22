@@ -23,8 +23,6 @@ This project is a **Library Statistics Dashboard** built using Python and Dash t
    - dash-bootstrap-components
    - plotly.express
    - requests
-   - transformers
-   - accelerate 
 
 ---
 
@@ -34,9 +32,7 @@ This project is a **Library Statistics Dashboard** built using Python and Dash t
 
 1. **Clone the Repository**:
 
-2. **Run the save_local_model.py to download LLM, Qwen2.5-Coder-1.5B-Instruct, from Hugging Face**
-
-3. **Run the Application**:  
+2. **Run the Application**:  
 Start the WebAPI by running `main.py`.
 
 ---
