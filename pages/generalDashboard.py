@@ -56,48 +56,42 @@ layout = dbc.Container([
         Input(component_id='year', component_property='value')
     ]
 )
-
 def update_cards(selected_value, month, year):
     if not month or not year:
         return html.Div("Please select at least one Year and Month.", className="text-center my-4 text-danger")
 
     if selected_value == 'Summary Page - Facts':
-        Summary_Page_Facts_df_filtered_by_year = Summary_Page_Facts_df[Summary_Page_Facts_df["Year"].isin(year)]
-        Summary_Page_Facts_df_filtered_by_Month = Summary_Page_Facts_df_filtered_by_year[Summary_Page_Facts_df_filtered_by_year["Month"].isin(month)]
-        Summary_Page_Facts_df_filtered_by_Month = Summary_Page_Facts_df_filtered_by_Month.groupby('DisplayName', as_index=False).agg('sum')
-        Summary_Page_Facts = Summary_Page_Facts_df_filtered_by_Month.to_dict(orient="records")
-        filtered_data = Summary_Page_Facts
+        df_filtered = Summary_Page_Facts_df[Summary_Page_Facts_df["Year"].isin(year) & Summary_Page_Facts_df["Month"].isin(month)]
+        df_grouped = df_filtered.groupby('DisplayName', as_index=False)['Value'].sum()
+        filtered_data = df_grouped.to_dict(orient="records")
 
         gridNumSetting = 4
         cards = Setting_Layout.updated_card(filtered_data, gridNumSetting)
+
     elif selected_value == 'Summary Page for Section Heads':
-        Summary_Page_Facts_df_filtered_by_year = Summary_Page_Facts_df[Summary_Page_Facts_df["Year"].isin(year)]
-        Summary_Page_Facts_df_filtered_by_Month = Summary_Page_Facts_df_filtered_by_year[Summary_Page_Facts_df_filtered_by_year["Month"].isin(month)]
-        Summary_Page_Facts_df_filtered_by_Month = Summary_Page_Facts_df_filtered_by_Month.groupby('DisplayName', as_index=False).agg('sum')
-        Summary_General = Summary_Page_Facts_df_filtered_by_Month.to_dict(orient="records")
-        filtered_data = Summary_General
+        df_filtered = Summary_General_df[Summary_General_df["Year"].isin(year) & Summary_General_df["Month"].isin(month)]
+        df_grouped = df_filtered.groupby('DisplayName', as_index=False)['Value'].sum()
+        filtered_data = df_grouped.to_dict(orient="records")
 
         gridNumSetting = 3
         cards = Setting_Layout.updated_card(filtered_data, gridNumSetting)
+
     elif selected_value == 'General Summary':
-        General_Summary_df_filtered_by_year = General_Summary_df[General_Summary_df["Year"].isin(year)]
-        General_Summary_df_filtered_by_Month = General_Summary_df_filtered_by_year[General_Summary_df_filtered_by_year["Month"].isin(month)]
-        General_Summary_df_filtered_by_Month = General_Summary_df_filtered_by_Month[~General_Summary_df_filtered_by_Month["DisplayName"].isin(LibraryInstructionService)]
-        General_Summary_df_filtered_by_Month = General_Summary_df_filtered_by_Month.groupby('DisplayName', as_index=False).agg('sum')
-        General_Summary = General_Summary_df_filtered_by_Month.to_dict(orient="records")
-        filtered_data = General_Summary
+        df_filtered = General_Summary_df[General_Summary_df["Year"].isin(year) & General_Summary_df["Month"].isin(month)]
+        df_filtered = df_filtered[~df_filtered["DisplayName"].isin(LibraryInstructionService)]
+        df_grouped = df_filtered.groupby('DisplayName', as_index=False)['Value'].sum()
+        filtered_data = df_grouped.to_dict(orient="records")
 
         gridNumSetting = 4
         cards = Setting_Layout.updated_card(filtered_data, gridNumSetting)
+
     else:
-        General_Summary_df_filtered_by_year = General_Summary_df[General_Summary_df["Year"].isin(year)]
-        General_Summary_df_filtered_by_Month = General_Summary_df_filtered_by_year[General_Summary_df_filtered_by_year["Month"].isin(month)]
-        General_Summary_df_filtered_by_Month = General_Summary_df_filtered_by_Month[General_Summary_df_filtered_by_Month["DisplayName"].isin(LibraryInstructionService)]
+        df_filtered = General_Summary_df[General_Summary_df["Year"].isin(year) & General_Summary_df["Month"].isin(month)]
+        df_filtered = df_filtered[df_filtered["DisplayName"].isin(LibraryInstructionService)]
+        df_grouped = df_filtered.groupby('DisplayName', as_index=False)['Value'].sum()
 
-        General_Summary_df_filtered_by_Month = General_Summary_df_filtered_by_Month.groupby('DisplayName', as_index=False).agg('sum')
-
-        Vistors_df = General_Summary_df_filtered_by_Month[General_Summary_df_filtered_by_Month["DisplayName"].isin(LibraryVisitsbyExternalVisitors)]
-        Library_df = General_Summary_df_filtered_by_Month[~General_Summary_df_filtered_by_Month["DisplayName"].isin(LibraryVisitsbyExternalVisitors)]
+        Vistors_df = df_grouped[df_grouped["DisplayName"].isin(LibraryVisitsbyExternalVisitors)]
+        Library_df = df_grouped[~df_grouped["DisplayName"].isin(LibraryVisitsbyExternalVisitors)]
 
         Vistors_data = Vistors_df.to_dict(orient="records")
         Library_data = Library_df.to_dict(orient="records")
@@ -106,23 +100,20 @@ def update_cards(selected_value, month, year):
         Vistors_cards = Setting_Layout.updated_card(Vistors_data, gridNumSetting)
         Library_cards = Setting_Layout.updated_card(Library_data, gridNumSetting)
 
-        layout = [
+        return [
             dbc.Row(
                 children=[
                     dbc.Col(
                         children=[
                             html.H4("Library Instruction Service", className="text-center mb-3 fw-bold"),
-                            dbc.Row(children=Library_cards, className="justify-content-center g-2",
-                                    id="library_summary")
+                            dbc.Row(children=Library_cards, className="justify-content-center g-2", id="library_summary")
                         ],
                         width=6
                     ),
-
                     dbc.Col(
                         children=[
                             html.H4("Library Visits by External Visitors", className="text-center mb-3 fw-bold"),
-                            dbc.Row(children=Vistors_cards, className="justify-content-center g-2",
-                                    id="visitors_summary")
+                            dbc.Row(children=Vistors_cards, className="justify-content-center g-2", id="visitors_summary")
                         ],
                         width=6
                     )
@@ -131,7 +122,4 @@ def update_cards(selected_value, month, year):
             )
         ]
 
-        return layout
-
-    layout = [dbc.Row(children=cards, className="justify-content-center g-2")]
-    return layout
+    return [dbc.Row(children=cards, className="justify-content-center g-2")]
