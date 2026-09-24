@@ -7,6 +7,7 @@ This project is a **Library Statistics Dashboard** built using Python and Dash t
 ## Features
 
 - **Data Visualizations**: Time-series plots and other insights generated from the library database.
+  ![image_alt](https://github.com/YungKamLun6000/Library_Statistic_Dashboard/blob/fb92dcd13921dff839cb4e7ed3900091258ad214/General%20Dashboard.png)
 - **General Dashboard**: Displays key statistics and metrics for the library.
 
 ---
