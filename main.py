@@ -1,12 +1,16 @@
 import dash
-from dash import Dash, html
+from dash import Dash, Input, Output, State, html
 import dash_bootstrap_components as dbc
 
 app = Dash(
     __name__,
     use_pages=True,
-    external_stylesheets=[dbc.themes.FLATLY, dbc.icons.BOOTSTRAP],
-    meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}]
+    title="CityU Library Analytics",
+    external_stylesheets=[
+        dbc.themes.BOOTSTRAP,
+        dbc.icons.BOOTSTRAP,
+    ],
+    meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
 )
 
 nav_links = [
@@ -15,51 +19,66 @@ nav_links = [
             page["name"],
             href=page["relative_path"],
             active="exact",
-            className="px-3 py-2 rounded text-black fw-bold text-decoration-none"
         )
     )
-    for page in dash.page_registry.values()
+    for page in sorted(dash.page_registry.values(), key=lambda page: page["order"])
 ]
 
-app.layout = html.Div([
-    dbc.Navbar(
-        dbc.Container([
-
-            dbc.NavbarBrand(
-                html.Span([
-                    html.Img(
-                        src=app.get_asset_url("CityUicon.png"),
-                        style={"height": "32px", "object-fit": "contain"},
-                        className="me-3"
+app.layout = html.Div(
+    [
+        dbc.Navbar(
+            dbc.Container(
+                [
+                    html.A(
+                        [
+                            html.Img(
+                                src=app.get_asset_url("CityUicon.png"),
+                                className="brand-mark",
+                                alt="City University of Hong Kong",
+                            ),
+                            html.Span(
+                                [
+                                    html.Span("CityU Library", className="brand-kicker"),
+                                    html.Span("Analytics", className="brand-title"),
+                                ]
+                            ),
+                        ],
+                        href="/",
+                        className="brand-lockup",
                     ),
-                    "Library Analytics Portal"
-                ], className="d-flex align-items-center"),
-                href="#",
-                className="text-black fw-bold text-decoration-none"
+                    dbc.NavbarToggler(id="nav-toggler", n_clicks=0),
+                    dbc.Collapse(
+                        dbc.Nav(nav_links, navbar=True, className="ms-lg-auto nav-pills-modern"),
+                        id="nav-collapse",
+                        is_open=False,
+                        navbar=True,
+                    ),
+                ],
+                fluid=True,
+                className="px-3 px-lg-4",
             ),
+            sticky="top",
+            expand="lg",
+            color="danger",
+            dark=True,
+            className="app-nav",
+        ),
+        html.Main(dash.page_container, className="app-main"),
+    ],
+    className="app-shell",
+)
 
-            dbc.Nav(
-                nav_links,
-                navbar=True,
-                className="ms-auto d-flex flex-row align-items-center"
-            )
 
-        ], fluid=True, className="px-4"),
-        dark=False,
-        sticky="top",
-        className="border-bottom shadow-sm mb-4 py-3",
-        style={
-            "background": "linear-gradient(90deg, #db8a8a 0%, #f03232 30%, #f21616 70%, #ff0000 100%)",
-            "border": "none"
-        }
-    ),
+@app.callback(
+    Output("nav-collapse", "is_open"),
+    Input("nav-toggler", "n_clicks"),
+    State("nav-collapse", "is_open"),
+)
+def toggle_nav(n_clicks, is_open):
+    if n_clicks:
+        return not is_open
+    return is_open
 
-    dbc.Container([
-        html.Main([
-            dash.page_container
-        ], className="bg-white p-4 rounded-3 shadow-sm min-vh-75")
-    ], fluid=True, className="px-md-5 pb-5")
-], className="bg-light min-vh-100")
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=False, host="0.0.0.0", port=8741)

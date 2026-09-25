@@ -4,7 +4,7 @@ import sqlite3
 
 def Dataapi_import(data1_url):
 
-    response1 = requests.get(data1_url)
+    response1 = requests.get(data1_url, timeout=30)
 
     data1_json = response1.json()
 
@@ -14,7 +14,7 @@ def Dataapi_import(data1_url):
 
 def Dataapi_import_nested(data1_url):
     # Step 1: Fetch the API JSON data
-    response1 = requests.get(data1_url)
+    response1 = requests.get(data1_url, timeout=30)
     data1_json = response1.json()
 
     # Step 2: Extract and normalize the nested "Fields" data

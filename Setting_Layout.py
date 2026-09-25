@@ -1,19 +1,28 @@
 from dash import html
 import dash_bootstrap_components as dbc
 
+
+def _column_props(grid_num_setting):
+    if grid_num_setting >= 12:
+        return {"xs": 12}
+    if grid_num_setting <= 3:
+        return {"xs": 12, "md": 6, "xl": 4}
+    return {"xs": 12, "sm": 6, "xl": 3}
+
+
 def updated_card(filtered_data, gridNumSetting):
-    updated_cards = [
+    props = _column_props(gridNumSetting)
+    return [
         dbc.Col(
-            dbc.Card(
-                dbc.CardBody([
-                    html.H5(f"{int(entry.get('Value', 0)):,}", className="card-title text-primary"),
-                    html.P(entry.get("DisplayName", "No Name"), className="card-text"),
-                ], className="text-center"),
-                style={"border": "1px solid #0d6efd", "borderRadius": "8px"},
+            html.Article(
+                [
+                    html.P(entry.get("DisplayName", "No Name"), className="metric-label"),
+                    html.P(f"{int(entry.get('Value', 0)):,}", className="metric-value"),
+                ],
+                className="metric-card",
             ),
-            width=gridNumSetting,
-            className="mb-4",
+            className="mb-3",
+            **props,
         )
         for entry in filtered_data
     ]
-    return updated_cards

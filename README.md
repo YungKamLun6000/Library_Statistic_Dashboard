@@ -1,62 +1,16 @@
-# Library Statistics Dashboard
+# CityU Library Analytics
 
-This project is a **Library Statistics Dashboard** built using Python and Dash to provide data visualizations and general statistics on a simple, interactive dashboard.
+A Dash dashboard for City University of Hong Kong library statistics. The overview page totals live figures from the library API. The trends page charts the local SQLite copy.
 
----
+## Run locally
 
-## Features
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python main.py
+```
 
-- **Data Visualizations**: Time-series plots and other insights generated from the library database.
-  ![image_alt](https://github.com/YungKamLun6000/Library_Statistic_Dashboard/blob/83a1f02b350d5c9123ed97ee712f7b36ed4538e5/DataVisualization.png)
-- **General Dashboard**: Displays key statistics and metrics for the library.
-  ![image_alt](https://github.com/YungKamLun6000/Library_Statistic_Dashboard/blob/fb92dcd13921dff839cb4e7ed3900091258ad214/General%20Dashboard.png)
----
+Open [http://127.0.0.1:8741](http://127.0.0.1:8741).
 
-## Requirements
-
-### Software Requirements:
-
-1. **Python Version**: Python 3.14
-
-2. **Required Python Libraries to be installed before running**:
-   - dash
-   - pandas
-   - dash-bootstrap-components
-   - plotly.express
-   - requests
-
----
-
-## Getting Started
-
-### Running the WebAPI
-
-1. **Clone the Repository**:
-
-2. **Run the Application**:  
-Start the WebAPI by running `main.py`.
-
----
-
-## Development Structure
-
-The project follows this modular structure:
-
-- **`main.py`**: The main entry point for running the WebAPI.
-- **`Setting_Layout.py`**: Responsible for setting up layouts and statistics for the `generalDashboard.py` page.
-- **`web_api.py`**: Converts data from an external API into a pandas DataFrame for further processing.
-- **`API_Grabber_to_database.py`**: Grabs and processes data from the API, creating a local SQLite database named `database.db`.
-
-### Pages Folder:
-- **`generalDashboard.py`**: A dashboard page that displays general library statistics.
-- **`Visualizations.py`**: A dashboard page that plots time-series graphs of columns extracted from the database.
-
----
-
-## Basic Knowledge for Dash Development
-
-Here are some key concepts for working with Dash:
-
-1. **`app = Dash()`**: The core constructor responsible for initializing the app.
-2. **`layout`**: Defines the front-end components displayed in the browser.
-3. **`@callback`**: Allows interaction between components (responding to user input).
+`API_Grabber_to_database.py` refreshes `database.db` from the same statistics service.

@@ -1,0 +1,231 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #f3f4f6;
+  color: #1a1a1a;
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.app-shell { min-height: 100vh; }
+
+.app-nav {
+  background-color: #c41230 !important;
+  border-bottom: 1px solid #a10f27;
+  padding: 0;
+}
+
+.app-nav .navbar-toggler {
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.app-nav .navbar-toggler-icon {
+  filter: invert(1);
+  width: 16px;
+  height: 16px;
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  text-decoration: none;
+  color: #fff;
+}
+
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 4px;
+  padding: 2px;
+}
+
+.brand-kicker,
+.brand-title {
+  display: inline;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.2;
+}
+
+.brand-kicker::after { content: " "; }
+
+.nav-pills-modern {
+  gap: 2px;
+}
+
+.nav-pills-modern .nav-link {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 6px 10px;
+  text-decoration: none;
+}
+
+.nav-pills-modern .nav-link:hover,
+.nav-pills-modern .nav-link:focus {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.nav-pills-modern .nav-link.active {
+  background: #fff;
+  color: #c41230;
+}
+
+.app-main {
+  width: min(1080px, calc(100% - 32px));
+  margin: 20px auto 40px;
+}
+
+.page-head { margin: 0 0 14px; }
+
+.page-head h1 {
+  margin: 0 0 4px;
+  padding: 0;
+  border: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #111;
+}
+
+.lede {
+  margin: 0;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 0 0 12px;
+}
+
+.field-label {
+  display: block;
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.view-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.view-switch label {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #1a1a1a;
+  cursor: pointer;
+}
+
+.view-switch input {
+  margin: 0 6px 0 0;
+}
+
+.dash-dropdown .Select-control {
+  border-radius: 6px !important;
+  border: 1px solid #d1d5db !important;
+  min-height: 36px;
+  background: #fff;
+  box-shadow: none;
+}
+
+.dash-dropdown .Select-placeholder,
+.dash-dropdown .Select-value-label,
+.dash-dropdown .Select-input > input {
+  line-height: 34px !important;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.dash-dropdown .Select-menu-outer {
+  border-radius: 6px;
+  border-color: #d1d5db;
+  z-index: 20;
+}
+
+.dash-dropdown .Select-value {
+  border-radius: 4px !important;
+  background: #f3f4f6 !important;
+  border: 1px solid #e5e7eb !important;
+  color: #111 !important;
+}
+
+.dash-dropdown.is-focused .Select-control,
+.dash-dropdown .Select-control:hover {
+  border-color: #9ca3af !important;
+  box-shadow: none;
+}
+
+.metric-card {
+  height: 100%;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.metric-label {
+  margin: 0 0 6px;
+  color: #4b5563;
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.metric-value {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: #111;
+}
+
+.split-panel {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  height: 100%;
+}
+
+.panel-title {
+  margin: 0 0 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+}
+
+.empty-note,
+.alert-banner {
+  padding: 10px 12px;
+  background: #fffbeb;
+  color: #1a1a1a;
+  border: 1px solid #f5d98a;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.chart-frame { min-height: 480px; }
+
+@media (max-width: 720px) {
+  .app-main { width: calc(100% - 20px); margin-top: 12px; }
+  .nav-pills-modern { margin: 4px 0 8px; }
+}
