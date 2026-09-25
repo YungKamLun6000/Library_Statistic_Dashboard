@@ -25,6 +25,14 @@ This project is a **Library Statistics Dashboard** built using Python and Dash t
    - plotly.express
    - requests
 
+Install those libraries from `requirements.txt`. In the project folder, run:
+
+```bash
+pip install -r requirements.txt
+```
+
+`pip` reads `requirements.txt` and installs each package listed in the file.
+
 ---
 
 ## Getting Started
