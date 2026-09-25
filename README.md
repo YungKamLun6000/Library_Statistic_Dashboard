@@ -50,14 +50,21 @@ Start the WebAPI by running `main.py`.
 
 The project follows this modular structure:
 
-- **`main.py`**: The main entry point for running the WebAPI.
-- **`Setting_Layout.py`**: Responsible for setting up layouts and statistics for the `generalDashboard.py` page.
+- **`main.py`**: The main entry point for running the WebAPI. It builds the navigation bar and loads each page.
+- **`Setting_Layout.py`**: Builds the statistic cards shown on the `generalDashboard.py` page.
 - **`web_api.py`**: Converts data from an external API into a pandas DataFrame for further processing.
 - **`API_Grabber_to_database.py`**: Grabs and processes data from the API, creating a local SQLite database named `database.db`.
+- **`requirements.txt`**: Lists the Python libraries installed before the app is run.
+- **`database.db`**: Local SQLite database read by the visualization page.
+- **`assets/style.css`**: Sets the dashboard layout and colors.
+- **`assets/CityUicon.png`**: CityU logo shown in the navigation bar.
 
 ### Pages Folder:
-- **`generalDashboard.py`**: A dashboard page that displays general library statistics.
-- **`Visualizations.py`**: A dashboard page that plots time-series graphs of columns extracted from the database.
+- **`generalDashboard.py`**: A dashboard page that displays general library statistics. It loads figures from the library API and filters them by year, month, and report.
+- **`Visualizations.py`**: A dashboard page that plots time-series graphs of columns extracted from `database.db`.
+
+### Screenshots Folder:
+- **`Screenshots/`**: Saved images of the General Dashboard and Data Visualizations pages.
 
 ---
 
